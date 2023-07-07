@@ -1,46 +1,8 @@
-<form [formGroup]="userForm" class="grid">
-  <div class="col-6 field">
-    <mat-form-field class="w-full" appearance="outline">
-      <mat-label>Nombre</mat-label>
-      <input formControlName="name" matInput type="text" name="name" />
-      <mat-error *ngIf="nameControl.hasError('required')">
-        Este campo es requerido.
-      </mat-error>
-      <mat-error *ngIf="nameControl.hasError('minlength')">
-        El campo debe tener al menos {{nameControl.errors?.['minlength']?.requiredLength}} caracteres.
-      </mat-error>
-    </mat-form-field>
+<div class="mb-5">
+  <button (click)="onCreateUser()" mat-flat-button color="primary" type="button">
+    <mat-icon>add</mat-icon>
+    Crear usuario
+  </button>
+</div>
 
-    <pre>{{ nameControl.errors | json }}</pre>
-  </div>
-
-
-  <div class="col-6 field">
-    <mat-form-field class="w-full" appearance="outline">
-      <mat-label>Apellido</mat-label>
-      <input formControlName="surname" matInput type="text" name="surname" />
-    </mat-form-field>
-  </div>
-
-
-  <div class="field col-6">
-    <mat-form-field class="w-full" appearance="outline">
-      <mat-label>Email</mat-label>
-      <input [formControl]="emailControl" matInput type="email" name="email" />
-    </mat-form-field>
-  </div>
-
-
-  <div class="field col-12">
-    <mat-form-field class="w-full" appearance="outline">
-      <mat-label>Contrasena</mat-label>
-      <input matInput type="password" name="password" />
-    </mat-form-field>
-  </div>
-
-  <div class="col-12 flex justify-content-end">
-    <button (click)="onSubmit()" type="submit" mat-button>Guardar</button>
-  </div>
-</form>
-
-<pre>{{ userForm.value | json }}</pre>
+<app-users-table [dataSource]="users"></app-users-table>
