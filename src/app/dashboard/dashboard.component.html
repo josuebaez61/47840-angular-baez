@@ -1,6 +1,6 @@
 <mat-drawer-container class="example-container" autosize>
   <!-- SIDEBAR -->
-  <mat-drawer #drawer class="example-sidenav" mode="side">
+  <mat-drawer mode="over" #drawer class="example-sidenav" mode="side">
 
   </mat-drawer>
   <!-- FIN SIDEBAR -->
@@ -21,5 +21,9 @@
     </mat-toolbar>
     <!-- FIN TOOLBAR -->
 
+    <main class="p-3">
+      <!-- <app-home></app-home> -->
+      <app-users></app-users>
+    </main>
   </div>
 </mat-drawer-container>
