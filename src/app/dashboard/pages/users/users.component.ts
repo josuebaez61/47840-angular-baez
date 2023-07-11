@@ -13,9 +13,9 @@ const ELEMENT_DATA: User[] = [
   },
   {
     id: 2,
-    name: 'Marcos',
-    surname: 'Rodriguez',
-    email: 'mark@mail.com',
+    name: 'Julian',
+    surname: 'Perez',
+    email: 'jperez@mail.com',
     password: '123456',
   },
 ];

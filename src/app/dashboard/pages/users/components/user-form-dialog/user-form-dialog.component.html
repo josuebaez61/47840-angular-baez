@@ -1,32 +1,34 @@
 <h1 mat-dialog-title>Crear usuario</h1>
 <div mat-dialog-content>
   <form [formGroup]="userForm" class="grid">
+
+    <!-- CAMPO DE NOMBRE -->
+    <!-- CAMPO DE NOMBRE -->
+    <!-- CAMPO DE NOMBRE -->
     <div class="col-6 field">
       <mat-form-field class="w-full" appearance="outline">
         <mat-label>Nombre</mat-label>
         <input formControlName="name" matInput type="text" name="name" />
-        <mat-error *ngIf="nameControl.hasError('required')">
-          Este campo es requerido.
-        </mat-error>
-        <mat-error *ngIf="nameControl.hasError('minlength')">
-          El campo debe tener al menos {{nameControl.errors?.['minlength']?.requiredLength}} caracteres.
-        </mat-error>
-        <mat-error *ngIf="nameControl.hasError('noHomero')">
-          No se admiten Homeros
+        <!-- ERRORES -->
+        <mat-error *ngFor="let error of nameControl.errors | keyvalue">
+          {{ error | controlErrorMessage }}
         </mat-error>
       </mat-form-field>
 
-      <pre>{{ nameControl.errors | json }}</pre>
+      <pre>{{ nameControl.errors | keyvalue | json }}</pre>
     </div>
+    <!-- CAMPO DE NOMBRE -->
 
 
     <div class="col-6 field">
       <mat-form-field class="w-full" appearance="outline">
         <mat-label>Apellido</mat-label>
         <input formControlName="surname" matInput type="text" name="surname" />
-        <mat-error *ngIf="nameControl.hasError('required')">
-          Este campo es requerido.
+
+        <mat-error *ngFor="let error of surnameControl.errors | keyvalue">
+          {{ error | controlErrorMessage }}
         </mat-error>
+
       </mat-form-field>
     </div>
 
@@ -35,8 +37,8 @@
       <mat-form-field class="w-full" appearance="outline">
         <mat-label>Email</mat-label>
         <input [formControl]="emailControl" matInput type="email" name="email" />
-        <mat-error *ngIf="nameControl.hasError('required')">
-          Este campo es requerido.
+        <mat-error *ngFor="let error of emailControl.errors | keyvalue">
+          {{ error | controlErrorMessage }}
         </mat-error>
       </mat-form-field>
     </div>
@@ -46,8 +48,8 @@
       <mat-form-field class="w-full" appearance="outline">
         <mat-label>Contrasena</mat-label>
         <input [formControl]="passwordControl" matInput type="password" name="password" autocomplete="off"/>
-        <mat-error *ngIf="nameControl.hasError('required')">
-          Este campo es requerido.
+        <mat-error *ngFor="let error of passwordControl.errors | keyvalue">
+          {{ error | controlErrorMessage }}
         </mat-error>
       </mat-form-field>
     </div>
