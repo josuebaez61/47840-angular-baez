@@ -11,7 +11,6 @@ import { noHomeroValidator } from 'src/app/shared/utils/form-validators';
 export class UserFormDialogComponent {
   nameControl = new FormControl(null, [
     Validators.required,
-    Validators.email,
     Validators.minLength(2),
     noHomeroValidator(),
   ]);

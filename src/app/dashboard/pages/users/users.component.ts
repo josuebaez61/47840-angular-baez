@@ -27,7 +27,29 @@ const ELEMENT_DATA: User[] = [
 export class UsersComponent {
   public users: User[] = ELEMENT_DATA;
 
-  constructor(private matDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog) {
+    // interface Alumno {
+    //   nombre: string;
+    //   nota: number;
+    // }
+    // interface Profesor {
+    //   nombre: string;
+    //   email: string;
+    // }
+
+    // const alumno: Alumno = { nombre: 'Juan', nota: 10 };
+    // const otroAlumno: any = { nombre: 'Pepito', nota: 5 };
+    // const profesor: Profesor = { nombre: 'Emilia', email: 'email@mail.com' }
+
+    // function isAlumno(obj: unknown): obj is Alumno {
+    //   if (!obj) return false;
+    //   return typeof obj === 'object' && 'nombre' in obj && 'nota' in obj;
+    // }
+
+    // if (isAlumno(otroAlumno)) {
+    //   otroAlumno
+    // }
+  }
 
   onCreateUser(): void {
     this.matDialog
