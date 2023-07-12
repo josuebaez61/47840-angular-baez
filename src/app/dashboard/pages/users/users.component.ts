@@ -27,6 +27,8 @@ const ELEMENT_DATA: User[] = [
 export class UsersComponent {
   public users: User[] = ELEMENT_DATA;
 
+  public today = new Date();
+
   constructor(private matDialog: MatDialog) {
     // interface Alumno {
     //   nombre: string;
@@ -61,6 +63,7 @@ export class UsersComponent {
       .subscribe({
         next: (v) => {
           if (v) {
+            // this.users.push()
             this.users = [
               ...this.users,
               {
@@ -77,5 +80,34 @@ export class UsersComponent {
           }
         },
       });
+  }
+
+  onDeleteUser(userToDelete: User): void {
+    if (confirm(`¿Está seguro de eliminar a ${userToDelete.name}?`)) {
+      this.users = this.users.filter((u) => u.id !== userToDelete.id);
+    }
+  }
+
+  onEditUser(userToEdit: User): void {
+    this.matDialog
+    // ABRO EL MODAL
+    .open(UserFormDialogComponent, {
+      data: userToEdit
+    })
+    // Y DESPUES DE QUE CIERRE
+    .afterClosed()
+    // HAGO ESTO...
+    .subscribe({
+      next: (userUpdated) => {
+        console.log(userUpdated)
+        if (userUpdated) {
+          this.users = this.users.map((user) => {
+            return user.id === userToEdit.id
+              ? { ...user, ...userUpdated } // VERDADERO
+              : user // FALSO ;
+          })
+        }
+      },
+    });
   }
 }

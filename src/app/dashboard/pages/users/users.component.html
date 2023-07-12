@@ -5,8 +5,14 @@
   </button>
 </div>
 
+<p>Fecha actual: {{ today | date: 'fullDate' }}</p>
+
 <p *appRepetir="1">
   Lorem ipsum, <span appResaltado="cyan">dolor sit amet consectetur adipisicing elit</span>. Aliquam doloremque est ipsam, dolores alias perspiciatis aliquid voluptatibus repudiandae, corrupti quo veniam ex, amet culpa eveniet mollitia repellendus tempora odio officia.
 </p>
 
-<app-users-table [dataSource]="users"></app-users-table>
+<app-users-table
+  [dataSource]="users"
+  (deleteUser)="onDeleteUser($event)"
+  (editUser)="onEditUser($event)"
+></app-users-table>

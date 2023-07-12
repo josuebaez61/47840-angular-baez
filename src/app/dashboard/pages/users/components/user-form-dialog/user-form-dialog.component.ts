@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { noHomeroValidator } from 'src/app/shared/utils/form-validators';
+import { User } from '../../models';
 
 @Component({
   selector: 'app-user-form-dialog',
@@ -9,16 +10,15 @@ import { noHomeroValidator } from 'src/app/shared/utils/form-validators';
   styleUrls: ['./user-form-dialog.component.scss'],
 })
 export class UserFormDialogComponent {
-  nameControl = new FormControl(null, [
+  nameControl = new FormControl<string | null>(null, [
     Validators.required,
     Validators.minLength(2),
     noHomeroValidator(),
   ]);
 
-  surnameControl = new FormControl(null, [Validators.required]);
-
-  emailControl = new FormControl(null, [Validators.required]);
-  passwordControl = new FormControl(null, [Validators.required]);
+  surnameControl = new FormControl<string | null>(null, [Validators.required]);
+  emailControl = new FormControl<string | null>(null, [Validators.required]);
+  passwordControl = new FormControl<string | null>(null, [Validators.required]);
 
   userForm = new FormGroup({
     name: this.nameControl,
@@ -27,7 +27,23 @@ export class UserFormDialogComponent {
     password: this.passwordControl,
   });
 
-  constructor(private dialogRef: MatDialogRef<UserFormDialogComponent>) {}
+  // userForm: FormGroup;
+
+  constructor(
+    private dialogRef: MatDialogRef<UserFormDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) private data?: User
+  ) {
+    // this.userForm = this.formBuilder.group({
+    //   name: [null, [Validators.required, Validators.min(2)]],
+    //   surname: [null, [Validators.required]],
+    // });
+    if (this.data) {
+      this.nameControl.setValue(this.data.name);
+      this.surnameControl.setValue(this.data.surname);
+      this.passwordControl.setValue(this.data.password);
+      this.emailControl.setValue(this.data.email);
+    }
+  }
 
   onSubmit(): void {
     if (this.userForm.invalid) {
