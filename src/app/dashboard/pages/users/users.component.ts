@@ -1,56 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserFormDialogComponent } from './components/user-form-dialog/user-form-dialog.component';
 import { User } from './models';
+import { UserService } from './user.service';
 
-const ELEMENT_DATA: User[] = [
-  {
-    id: 1,
-    name: 'Marcos',
-    surname: 'Rodriguez',
-    email: 'mark@mail.com',
-    password: '123456',
-  },
-  {
-    id: 2,
-    name: 'Julian',
-    surname: 'Perez',
-    email: 'jperez@mail.com',
-    password: '123456',
-  },
-];
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent {
-  public users: User[] = ELEMENT_DATA;
+  public users: User[] = [];
 
   public today = new Date();
 
-  constructor(private matDialog: MatDialog) {
-    // interface Alumno {
-    //   nombre: string;
-    //   nota: number;
-    // }
-    // interface Profesor {
-    //   nombre: string;
-    //   email: string;
-    // }
-
-    // const alumno: Alumno = { nombre: 'Juan', nota: 10 };
-    // const otroAlumno: any = { nombre: 'Pepito', nota: 5 };
-    // const profesor: Profesor = { nombre: 'Emilia', email: 'email@mail.com' }
-
-    // function isAlumno(obj: unknown): obj is Alumno {
-    //   if (!obj) return false;
-    //   return typeof obj === 'object' && 'nombre' in obj && 'nota' in obj;
-    // }
-
-    // if (isAlumno(otroAlumno)) {
-    //   otroAlumno
-    // }
+  constructor(
+    private matDialog: MatDialog,
+    private userService: UserService,
+    @Inject('IS_DEV') private isDev: boolean,
+  ) {
+    this.users = this.userService.getUsers();
+    console.log(this.isDev);
   }
 
   onCreateUser(): void {
@@ -92,6 +62,7 @@ export class UsersComponent {
     this.matDialog
     // ABRO EL MODAL
     .open(UserFormDialogComponent, {
+      // LE ENVIO AL MODAL, EL USUARIO QUE QUIERO EDITAR
       data: userToEdit
     })
     // Y DESPUES DE QUE CIERRE
