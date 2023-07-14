@@ -25,4 +25,23 @@ export class UserService {
   getUsers(): User[] {
     return this.users;
   }
+
+  // createUser(user: User): void {
+  //   this.users = [
+  //     ...this.users,
+  //     user,
+  //   ]
+  // }
+  // deleteUserById(user: User): void {
+  //   this.users = [
+  //     ...this.users,
+  //     user,
+  //   ]
+  // }
+  // updateUserById(user: User): void {
+  //   this.users = [
+  //     ...this.users,
+  //     user,
+  //   ]
+  // }
 }
