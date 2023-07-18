@@ -27,7 +27,19 @@ export class UsersComponent implements OnDestroy {
     private userService: UserService,
     @Inject('IS_DEV') private isDev: boolean
   ) {
-    this.users = this.userService.getUsers();
+
+
+    // PRIMERO CARGO LOS USUARIOS
+    this.userService.loadUsers();
+    // LUEGO LOS OBTENGO
+    this.userService.getUsers().subscribe({
+      // then
+      next: (v) => {
+        console.log(v);
+        this.users = v;
+        // this.userService.sendNotification('Se cargaron los usuarios');
+      }
+    });
 
     // REPASO ASINCRONIA
     //-------------------
@@ -57,31 +69,34 @@ export class UsersComponent implements OnDestroy {
     // ==============================
     // PIPE viene del ingles tuberia
     // ==============================
-    semaforo
-      .pipe(
-        takeUntil(this.destroyed),
-        map((color) => color.toUpperCase())
-      )
-      .subscribe({
-        // Cuando el observable emite
-        next: (color) => {
-          console.log(color);
-        },
-        // Cuando el observable emite un error
-        error: () => {},
-        // Cuando el observable se completa
-        complete: () => {
-          console.log('Se completo');
-        },
-      });
+    // semaforo
+    //   .pipe(
+    //     takeUntil(this.destroyed),
+    //     map((color) => color.toUpperCase())
+    //   )
+    //   .subscribe({
+    //     // Cuando el observable emite
+    //     // then
+    //     next: (color) => {
+    //       console.log(color);
+    //     },
+    //     // Cuando el observable emite un error
+    //     // catch
+    //     error: () => {},
+    //     // Cuando el observable se completa
+    //     // finally
+    //     complete: () => {
+    //       console.log('Se completo');
+    //     },
+    //   });
 
-    meDevuelveElDinero
-      // Cuando la promesa se cumple
-      // .then((value) => console.log(value))
-      // Cuando falla
-      .catch((error) => alert(error))
-      // Cuando finaliza todo el proceso, haya sido cumplida o no
-      .finally(() => {});
+    // meDevuelveElDinero
+    //   // Cuando la promesa se cumple
+    //   .then((value) => console.log(value))
+    //   // Cuando falla
+    //   .catch((error) => alert(error))
+    //   // Cuando finaliza todo el proceso, haya sido cumplida o no
+    //   .finally(() => {});
 
     // console.log('FIRST')
     // fetch('https://reqres.in/api/users?page=2')
