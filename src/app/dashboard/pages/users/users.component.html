@@ -11,8 +11,17 @@
   Lorem ipsum, <span appResaltado="cyan">dolor sit amet consectetur adipisicing elit</span>. Aliquam doloremque est ipsam, dolores alias perspiciatis aliquid voluptatibus repudiandae, corrupti quo veniam ex, amet culpa eveniet mollitia repellendus tempora odio officia.
 </p>
 
+
+<h1>{{ loading ? 'Cargando...' : '' }}</h1>
+
+<div *ngIf="!loading">
+  {{ nombres }}
+  <br>
+  {{ numeros }}
+</div>
+
 <app-users-table
-  [dataSource]="users"
+  [dataSource]="(users | async) || []"
   (deleteUser)="onDeleteUser($event)"
   (editUser)="onEditUser($event)"
 ></app-users-table>
