@@ -74,7 +74,10 @@ export class UsersComponent implements OnDestroy {
     //   })
 
     const obs1$ = of(['Maria', 'Juan', 'Santiago']).pipe(delay(3000));
-    const obs2$ = of([1, 2, 3, 4, 5]).pipe(delay(6000), map((r) => r.map((n) => n * 2)));
+    const obs2$ = of([1, 2, 3, 4, 5]).pipe(
+      delay(6000),
+      map((r) => r.map((n) => n * 2))
+    );
 
     this.loading = true;
     // NO FUNCIONA BIEN...
@@ -91,10 +94,7 @@ export class UsersComponent implements OnDestroy {
     // });
 
     // FUNCIONA
-    forkJoin([
-      obs1$,
-      obs2$
-    ]).subscribe({
+    forkJoin([obs1$, obs2$]).subscribe({
       next: ([nombres, numeros]) => {
         this.nombres = nombres;
         this.numeros = numeros;
@@ -103,7 +103,7 @@ export class UsersComponent implements OnDestroy {
     });
 
     // PRIMERO CARGO LOS USUARIOS
-    this.userService.loadUsers();
+    // this.userService.loadUsers();
     // LUEGO LOS OBTENGO
     // this.userService.getUsers().subscribe({
     //   // then
@@ -243,13 +243,8 @@ export class UsersComponent implements OnDestroy {
       // HAGO ESTO...
       .subscribe({
         next: (userUpdated) => {
-          console.log(userUpdated);
           if (userUpdated) {
-            // this.users = this.users.map((user) => {
-            //   return user.id === userToEdit.id
-            //     ? { ...user, ...userUpdated } // VERDADERO
-            //     : user; // FALSO ;
-            // });
+            this.userService.updateUser(userToEdit.id, userUpdated);
           }
         },
       });

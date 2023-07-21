@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from './models';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, take, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +37,7 @@ export class UserService {
 
     this.sendNotification$.subscribe({
       next: (message) => alert(message),
-    })
+    });
   }
 
   sendNotification(notification: string): void {
@@ -49,15 +49,28 @@ export class UserService {
   }
 
   getUsers(): Observable<User[]> {
+    this._users$.next(this.users);
     return this.users$;
   }
 
   createUser(user: User): void {
-    this.users = [
-      ...this.users,
-      user,
-    ]
+    this._users$.pipe(take(1)).subscribe({
+      next: (users) => {
+        this._users$.next([...users, user]);
+      },
+    });
   }
+
+  updateUser(id: number, data: User): void {
+    this._users$.pipe(take(1)).subscribe({
+      next: (users) => {
+        this._users$.next(
+          users.map((u) => (u.id === id ? { ...u, ...data } : u))
+        );
+      },
+    });
+  }
+
   // deleteUserById(user: User): void {
   //   this.users = [
   //     ...this.users,
