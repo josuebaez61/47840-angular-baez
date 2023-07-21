@@ -41,6 +41,8 @@ export class UserService {
 
   createUser(user: CreateUserData): void {
     // TAKE 1 = solo quiero recibir una emision
+    // SUPER IMPORTANTE PORQUE DE LO CONTRARIO,
+    // CREARIAN UN BUCLE INFINITO
     this.users$.pipe(take(1)).subscribe({
       next: (arrayActual) => {
         this._users$.next([
