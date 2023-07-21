@@ -9,6 +9,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatCardModule } from '@angular/material/card';
 import eslocale from '@angular/common/locales/es-AR'
 import { registerLocaleData } from '@angular/common';
+import { AuthModule } from './auth/auth.module';
 
 registerLocaleData(eslocale);
 
@@ -20,7 +21,8 @@ registerLocaleData(eslocale);
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    DashboardModule,
+    DashboardModule, // dashboard module
+    AuthModule, // auth module
     MatCardModule
   ],
   providers: [

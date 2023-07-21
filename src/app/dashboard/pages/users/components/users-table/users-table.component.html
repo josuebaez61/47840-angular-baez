@@ -30,6 +30,9 @@
       - accent
       - warn
       -->
+      <button [routerLink]="user.id" mat-icon-button color="primary">
+        <mat-icon>visibility</mat-icon>
+      </button>
       <button (click)="editUser.emit(user)" mat-icon-button color="primary">
         <mat-icon>edit</mat-icon>
       </button>
