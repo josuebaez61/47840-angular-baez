@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import eslocale from '@angular/common/locales/es-AR'
 import { registerLocaleData } from '@angular/common';
 import { AuthModule } from './auth/auth.module';
+import { ProductsModule } from './dashboard/pages/products/products.module';
 
 registerLocaleData(eslocale);
 

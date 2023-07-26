@@ -7,6 +7,7 @@ import { UsersComponent } from './dashboard/pages/users/users.component';
 import { UserDetailComponent } from './dashboard/pages/users/pages/user-detail/user-detail.component';
 import { LoginComponent } from './auth/pages/login/login.component';
 import { RegisterComponent } from './auth/pages/register/register.component';
+import { ProductsComponent } from './dashboard/pages/products/products.component';
 
 const routes: Routes = [
   {
@@ -25,9 +26,6 @@ const routes: Routes = [
             // /dashboard/users
             path: '',
             component: UsersComponent,
-            data: {
-
-            }
           },
           {
             // /dashboard/users/:id
@@ -35,6 +33,10 @@ const routes: Routes = [
             component: UserDetailComponent
           }
         ]
+      },
+      {
+        path: 'products',
+        component: ProductsComponent,
       },
       // {
       //   path: 'users',
@@ -71,7 +73,7 @@ const routes: Routes = [
   {
     // ** Se usa para decir "cualquier path que no sea ninguno de los declarados anteriormente"
     path: '**',
-    redirectTo: '/auth',
+    redirectTo: '/auth/login',
   }
 ];
 

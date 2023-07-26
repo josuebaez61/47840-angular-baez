@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
 import { NavMenuComponent } from './layout/nav-menu/nav-menu.component';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
+import { ProductsModule } from './pages/products/products.module';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -27,6 +28,7 @@ import { ToolbarComponent } from './layout/toolbar/toolbar.component';
     HomeModule,
     RouterModule,
     UsersModule,
+    ProductsModule, // products
   ],
   exports: [
     DashboardComponent
