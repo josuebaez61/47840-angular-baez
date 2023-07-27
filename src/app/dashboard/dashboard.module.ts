@@ -12,14 +12,12 @@ import { MatListModule } from '@angular/material/list';
 import { NavMenuComponent } from './layout/nav-menu/nav-menu.component';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { ProductsModule } from './pages/products/products.module';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    NavMenuComponent,
-    ToolbarComponent
-  ],
+  declarations: [DashboardComponent, NavMenuComponent, ToolbarComponent],
   imports: [
     CommonModule,
+    DashboardRoutingModule, // MODULO DE RUTAS
     MatSidenavModule,
     MatButtonModule,
     MatToolbarModule,
@@ -30,8 +28,6 @@ import { ProductsModule } from './pages/products/products.module';
     UsersModule,
     ProductsModule, // products
   ],
-  exports: [
-    DashboardComponent
-  ]
+  exports: [DashboardComponent],
 })
-export class DashboardModule { }
+export class DashboardModule {}
