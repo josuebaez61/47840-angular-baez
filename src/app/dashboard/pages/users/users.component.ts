@@ -4,6 +4,7 @@ import { UserFormDialogComponent } from './components/user-form-dialog/user-form
 import { User } from './models';
 import { UserService } from './user.service';
 import { Observable, Subject } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-users',
@@ -15,9 +16,12 @@ export class UsersComponent implements OnDestroy {
   public destroyed = new Subject<boolean>();
 
   public loading = false;
-  constructor(private matDialog: MatDialog, private userService: UserService) {
-    this.userService.loadUsers();
-    this.users = this.userService.getUsers();
+  constructor(
+    private matDialog: MatDialog,
+    private userService: UserService,
+    public authService: AuthService
+  ) {
+    this.users = this.userService.loadUsers();
   }
 
   ngOnDestroy(): void {

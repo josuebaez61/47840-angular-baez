@@ -1,9 +1,16 @@
 <div class="mb-5">
-  <button (click)="onCreateUser()" mat-flat-button color="primary" type="button">
+  <button
+    (click)="onCreateUser()"
+    mat-flat-button
+    color="primary"
+    type="button"
+  >
     <mat-icon>add</mat-icon>
     Crear usuario
   </button>
 </div>
+
+{{ authService.authUser$ | async | json }}
 <app-users-table
   [dataSource]="(users | async) || []"
   (deleteUser)="onDeleteUser($event)"
