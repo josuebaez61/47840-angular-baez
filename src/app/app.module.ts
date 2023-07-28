@@ -8,7 +8,6 @@ import { MatCardModule } from '@angular/material/card';
 import { registerLocaleData } from '@angular/common';
 import eslocale from '@angular/common/locales/es-AR'
 
-
 registerLocaleData(eslocale);
 
 @NgModule({
@@ -21,7 +20,7 @@ registerLocaleData(eslocale);
     BrowserAnimationsModule,
     // DashboardModule, // dashboard module
     // AuthModule, // auth module
-    MatCardModule
+    MatCardModule,
   ],
   providers: [
     {

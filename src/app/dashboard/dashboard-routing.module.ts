@@ -1,11 +1,9 @@
 import { NgModule } from "@angular/core";
-import { RouterModule } from "@angular/router";
+import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from "./pages/home/home.component";
 import { UsersComponent } from "./pages/users/users.component";
 import { UserDetailComponent } from "./pages/users/pages/user-detail/user-detail.component";
 import { ProductsComponent } from "./pages/products/products.component";
-
-
 
 @NgModule({
   imports: [

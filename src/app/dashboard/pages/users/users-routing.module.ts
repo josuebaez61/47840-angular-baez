@@ -21,10 +21,10 @@ import { UserDetailComponent } from './pages/user-detail/user-detail.component';
         path: ':id',
         component: UserDetailComponent,
       },
-      {
-        path: 'some-module',
-        // loadChildren: () => import('..')
-      }
+      // {
+      //   path: 'some-module',
+      //   // loadChildren: () => import('..')
+      // }
     ])
   ],
   exports: [RouterModule],
