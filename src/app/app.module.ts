@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { registerLocaleData } from '@angular/common';
 import eslocale from '@angular/common/locales/es-AR'
+import { HttpClientModule } from '@angular/common/http';
 
 registerLocaleData(eslocale);
 
@@ -18,6 +19,7 @@ registerLocaleData(eslocale);
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     // DashboardModule, // dashboard module
     // AuthModule, // auth module
     MatCardModule,

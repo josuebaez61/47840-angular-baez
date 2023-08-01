@@ -12,11 +12,13 @@ import { Observable, Subject } from 'rxjs';
 })
 export class UsersComponent implements OnDestroy {
   public users: Observable<User[]>;
+  public isLoading$: Observable<boolean>;
   public destroyed = new Subject<boolean>();
 
   public loading = false;
   constructor(private matDialog: MatDialog, private userService: UserService) {
     this.userService.loadUsers();
+    this.isLoading$ = this.userService.isLoading$;
     this.users = this.userService.getUsers();
   }
 
