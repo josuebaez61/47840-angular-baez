@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Josue",
+      "surname": "Baez",
+      "email": "jb@test.com",
+      "password": "123456",
+      "token": "skMFDJksdk324asVD"
+    },
+    {
+      "name": "test",
+      "email": "josue@tec-software.com",
+      "password": "123456",
+      "surname": "test",
+      "id": 2
+    }
+  ]
+}
