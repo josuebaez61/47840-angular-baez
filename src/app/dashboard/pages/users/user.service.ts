@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CreateUserData, UpdateUserData, User } from './models';
 import { BehaviorSubject, Observable, Subject, delay, map, mergeMap, of, take } from 'rxjs';
 import { NotifierService } from 'src/app/core/services/notifier.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,15 @@ export class UserService {
     //   next: (usuariosFromDb) => this._users$.next(usuariosFromDb),
     // });
     this._isLoading$.next(true);
-    this.httpClient.get<User[]>('http://localhost:3000/users').subscribe({
+    this.httpClient.get<User[]>('http://localhost:3000/users', {
+      headers: new HttpHeaders({
+        'token': '12345678910'
+      }),
+      // params: {
+      //   page: 1,
+      //   limit: 50,
+      // }
+    }).subscribe({
       next: (response) => {
         // SI TODO SALE OK...
         this._users$.next(response);
@@ -89,16 +97,23 @@ export class UserService {
   }
 
   updateUserById(id: number, usuarioActualizado: UpdateUserData): void {
-    this.users$.pipe(take(1)).subscribe({
-      next: (arrayActual) => {
-        this._users$.next(
-          arrayActual.map((u) =>
-            u.id === id ? { ...u, ...usuarioActualizado } : u
-          )
-        );
-        this.notifier.showSuccess('Usuario Actualizado');
-      },
-    });
+    // this.users$.pipe(take(1)).subscribe({
+    //   next: (arrayActual) => {
+    //     this._users$.next(
+    //       arrayActual.map((u) =>
+    //         u.id === id ? { ...u, ...usuarioActualizado } : u
+    //       )
+    //     );
+    //     this.notifier.showSuccess('Usuario Actualizado');
+    //   },
+    // });
+
+    // CON HTTP CLIENT
+
+    this.httpClient.put('http://localhost:3000/users/' + id, usuarioActualizado).subscribe({
+      next: () => this.loadUsers(),
+    })
+
   }
 
   deleteUserById(id: number): void {
@@ -116,15 +131,15 @@ export class UserService {
     // OBSERVABLE 1 (se comunica con la API)
     this.httpClient.delete('http://localhost:3000/users/' + id)
       .pipe(
-        mergeMap(
-          // En este punto el la comunicacion ya sucedio (PUNTO 1)
-          (responseUserDelete) => this.users$.pipe(
-            take(1),
-            map((arrayActual) => arrayActual.filter((u) => u.id !== id)) // En este punto del codigo ya actualizamos el array (PUNTO NUMERO 2)
-          )
-        )
+        // mergeMap(
+        //   // En este punto el la comunicacion ya sucedio (PUNTO 1)
+        //   (responseUserDelete) => this.users$.pipe(
+        //     take(1),
+        //     map((arrayActual) => arrayActual.filter((u) => u.id !== id)) // En este punto del codigo ya actualizamos el array (PUNTO NUMERO 2)
+        //   )
+        // )
       ).subscribe({
-        next: (arrayActualizado) => this._users$.next(arrayActualizado),
+        next: (arrayActualizado) => this.loadUsers(),
       })
 
     // OBSERVABLE 2
