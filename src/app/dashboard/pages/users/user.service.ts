@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CreateUserData, UpdateUserData, User } from './models';
-import { BehaviorSubject, Observable, Subject, delay, map, mergeMap, of, take } from 'rxjs';
+import { BehaviorSubject, Observable, map, mergeMap, take } from 'rxjs';
 import { NotifierService } from 'src/app/core/services/notifier.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { generateRandomString } from 'src/app/shared/utils/helpers';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +24,7 @@ export class UserService {
     //   next: (usuariosFromDb) => this._users$.next(usuariosFromDb),
     // });
     this._isLoading$.next(true);
-    this.httpClient.get<User[]>('http://localhost:3000/users', {
+    this.httpClient.get<User[]>(environment.baseApiUrl + '/users', {
       headers: new HttpHeaders({
         'token': '12345678910'
       }),
@@ -80,7 +82,9 @@ export class UserService {
     //   }
     // })
 
-    this.httpClient.post<User>('http://localhost:3000/users', payload)
+    const token = generateRandomString(20);
+
+    this.httpClient.post<User>(environment.baseApiUrl  + '/users', { ...payload, token })
       .pipe(
         mergeMap((userCreate) => this.users$.pipe(
           take(1),
@@ -110,7 +114,7 @@ export class UserService {
 
     // CON HTTP CLIENT
 
-    this.httpClient.put('http://localhost:3000/users/' + id, usuarioActualizado).subscribe({
+    this.httpClient.put(environment.baseApiUrl + '/users/' + id, usuarioActualizado).subscribe({
       next: () => this.loadUsers(),
     })
 
@@ -129,7 +133,7 @@ export class UserService {
     // 2 - Quiero actualizar el listado (array de usuarios)
 
     // OBSERVABLE 1 (se comunica con la API)
-    this.httpClient.delete('http://localhost:3000/users/' + id)
+    this.httpClient.delete(environment.baseApiUrl + '/users/' + id)
       .pipe(
         // mergeMap(
         //   // En este punto el la comunicacion ya sucedio (PUNTO 1)

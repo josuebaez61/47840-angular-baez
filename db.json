@@ -5,7 +5,16 @@
       "surname": "Baez",
       "email": "jb@email.com",
       "password": "123456",
+      "token": "bG1Ptx4ZztwJwAoyjxQy",
       "id": 1
+    },
+    {
+      "name": "test",
+      "email": "test@mail.com",
+      "password": "123456",
+      "surname": "test",
+      "token": "aG1Ptx4ZBtwJCAoyjxQy",
+      "id": 2
     }
   ],
   "products": []
