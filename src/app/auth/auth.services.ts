@@ -5,6 +5,7 @@ import { User } from "../dashboard/pages/users/models";
 import { NotifierService } from "../core/services/notifier.service";
 import { Router } from "@angular/router";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { environment } from "src/environments/environment";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -19,7 +20,7 @@ export class AuthService {
 
 
   isAuthenticated(): Observable<boolean> {
-    return this.httpClient.get<User[]>('http://localhost:3000/users', {
+    return this.httpClient.get<User[]>(environment.baseApiUrl + '/users', {
       params: {
         token: localStorage.getItem('token') || '',
       }
@@ -32,7 +33,7 @@ export class AuthService {
 
   login(payload: LoginPayload): void {
 
-    this.httpClient.get<User[]>('http://localhost:3000/users', {
+    this.httpClient.get<User[]>(environment.baseApiUrl + '/users', {
       params: {
         email: payload.email || '',
         password: payload.password || ''
@@ -43,7 +44,14 @@ export class AuthService {
           const authUser = response[0];
           // LOGIN VALIDO
           this._authUser$.next(authUser);
+
+
+          // ESTA EJECUTANDO ESTA LINEA
           this.router.navigate(['/dashboard']);
+
+
+
+
           localStorage.setItem('token', authUser.token);
         } else {
           // LOGIN INVALIDO
