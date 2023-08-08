@@ -26,6 +26,13 @@ export class AuthService {
       }
     }).pipe(
       map((usersResult) => {
+
+        if (usersResult.length) {
+          const authUser = usersResult[0];
+          // LOGIN VALIDO
+          this._authUser$.next(authUser);
+        }
+
         return !!usersResult.length
       })
     )
