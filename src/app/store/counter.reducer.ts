@@ -3,7 +3,11 @@ import { CounterActions } from "./counter.actions";
 
 export const counterFeatureKey = 'counter';
 
-const initialState = {
+export interface CounterState {
+  value: number;
+}
+
+const initialState: CounterState = {
   value: 0
 }
 
