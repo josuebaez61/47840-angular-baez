@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,6 +8,9 @@ import { MatCardModule } from '@angular/material/card';
 import { registerLocaleData } from '@angular/common';
 import eslocale from '@angular/common/locales/es-AR'
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { appReducer } from './store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 registerLocaleData(eslocale);
 
@@ -23,6 +26,8 @@ registerLocaleData(eslocale);
     // DashboardModule, // dashboard module
     // AuthModule, // auth module
     MatCardModule,
+    StoreModule.forRoot(appReducer, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [
     {
