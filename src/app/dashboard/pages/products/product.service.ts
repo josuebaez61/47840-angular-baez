@@ -24,6 +24,7 @@ export class ProductService {
         description: 'lorem ipsum',
         price: 1000,
         stock: 50,
+        categoryId: 1,
       },
       {
         id: 2,
@@ -31,6 +32,7 @@ export class ProductService {
         description: 'lorem ipsum',
         price: 500,
         stock: 25,
+        categoryId: 1,
       },
       {
         id: 3,
@@ -38,6 +40,7 @@ export class ProductService {
         description: 'lorem ipsum',
         price: 800,
         stock: 15,
+        categoryId: 1,
       },
     ]);
   }
@@ -53,6 +56,7 @@ export class ProductService {
             description: 'Random description',
             price: 5400,
             stock: 23,
+            categoryId: 1,
           },
         ]);
       },
