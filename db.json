@@ -17,5 +17,30 @@
       "id": 2
     }
   ],
-  "products": []
+  "products": [
+    {
+      "id": 1,
+      "name": "Heladera",
+      "description": "lorem ipsum",
+      "price": 1000,
+      "stock": 50,
+      "categoryId": 1
+    },
+    {
+      "id": 2,
+      "name": "Estufa",
+      "description": "lorem ipsum",
+      "price": 500,
+      "stock": 25,
+      "categoryId": 2
+    },
+    {
+      "id": 3,
+      "name": "Computadora",
+      "description": "lorem ipsum",
+      "price": 800,
+      "stock": 15,
+      "categoryId": 2
+    }
+  ]
 }

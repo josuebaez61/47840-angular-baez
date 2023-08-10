@@ -6,11 +6,13 @@ import { CATEGORIES_MOCK } from '../mocks';
 export const categoriesFeatureKey = 'categories';
 
 export interface State {
-  categories: Category[]
+  categories: Category[],
+  categoryDetail: Category | null,
 }
 
 export const initialState: State = {
-  categories: []
+  categories: [],
+  categoryDetail: null,
 };
 
 export const reducer = createReducer(
@@ -19,9 +21,17 @@ export const reducer = createReducer(
   // loadCategories
   on(CategoriesActions.loadCategories, state => {
     return {
+      ...state,
       categories: CATEGORIES_MOCK,
     }
   }),
+
+  on(CategoriesActions.loadCategoryDetail, (state, action) => {
+    return {
+      ...state,
+      categoryDetail: CATEGORIES_MOCK.find((c) => c.id == action.categoryId) || null,
+    }
+  })
 
 );
 

@@ -7,3 +7,5 @@ export const selectCategoriesState = createFeatureSelector<fromCategories.State>
 
 
 export const selectCategoriesArray = createSelector(selectCategoriesState, (state) => state.categories)
+
+export const selectCategoryDetailName = createSelector(selectCategoriesState, (state) => state.categoryDetail?.name)
