@@ -12,16 +12,17 @@ import { FullNamePipe } from './pipes/full-name.pipe';
 import { ControlErrorMessagePipe } from './pipes/control-error-message.pipe';
 import { ResaltadoDirective } from './directives/resaltado.directive';
 import { RepetirDirective } from './directives/repetir.directive';
+import { MatSelectModule } from '@angular/material/select';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 @NgModule({
   declarations: [
     FullNamePipe,
     ControlErrorMessagePipe,
     ResaltadoDirective,
-    RepetirDirective
+    RepetirDirective,
   ],
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   exports: [
     MatDialogModule,
     MatCardModule,
@@ -35,6 +36,8 @@ import { RepetirDirective } from './directives/repetir.directive';
     ControlErrorMessagePipe,
     ResaltadoDirective,
     RepetirDirective,
-  ]
+    MatSelectModule,
+    MatProgressBarModule,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

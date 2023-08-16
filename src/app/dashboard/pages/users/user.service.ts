@@ -143,7 +143,10 @@ export class UserService {
         //   )
         // )
       ).subscribe({
+        // TODO OK
         next: (arrayActualizado) => this.loadUsers(),
+        error: (err) => this.notifier.showError('OCURRIO UN ERROR'),
+        complete: () => {}
       })
 
     // OBSERVABLE 2

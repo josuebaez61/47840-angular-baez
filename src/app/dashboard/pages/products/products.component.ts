@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Product } from './models';
 import { ProductService } from './product.service';
 import { Observable, take } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectIsAdmin } from 'src/app/store/auth/auth.selectors';
 
 @Component({
   selector: 'app-products',
@@ -15,8 +17,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   public displayedColumns = ['id', 'name', 'price', 'actions'];
 
-  constructor(private productService: ProductService) {
+  public isAdmin$: Observable<boolean>;
+
+  constructor(private productService: ProductService, private store: Store) {
     this.data$ = this.productService.getProducts();
+    this.isAdmin$ = this.store.select(selectIsAdmin);
   }
 
   ngOnDestroy(): void {

@@ -8,11 +8,12 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Store } from "@ngrx/store";
 import { AuthActions } from "../store/auth/auth.actions";
+import { selectAuthUser } from "../store/auth/auth.selectors";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   // private _authUser$ = new BehaviorSubject<User | null>(null);
-  // public authUser$ = this._authUser$.asObservable();
+  public authUser$ = this.store.select(selectAuthUser);
 
   constructor(
     private notifier: NotifierService,
@@ -20,6 +21,7 @@ export class AuthService {
     private httpClient: HttpClient,
     private store: Store,
   ) {}
+
 
 
   isAuthenticated(): Observable<boolean> {

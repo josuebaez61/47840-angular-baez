@@ -21,11 +21,14 @@ export class UserFormDialogComponent {
   emailControl = new FormControl<string | null>(null, [Validators.required]);
   passwordControl = new FormControl<string | null>(null, [Validators.required]);
 
+  roleControl = new FormControl<string| null>(null, [Validators.required]);
+
   userForm = new FormGroup({
     name: this.nameControl,
     surname: this.surnameControl,
     email: this.emailControl,
     password: this.passwordControl,
+    role: this.roleControl,
   });
 
   // userForm: FormGroup;
@@ -34,16 +37,13 @@ export class UserFormDialogComponent {
     private dialogRef: MatDialogRef<UserFormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data?: User
   ) {
-    // this.userForm = this.formBuilder.group({
-    //   name: [null, [Validators.required, Validators.min(2)]],
-    //   surname: [null, [Validators.required]],
-    // });
     if (this.data) {
       this.editingUser = this.data;
       this.nameControl.setValue(this.data.name);
       this.surnameControl.setValue(this.data.surname);
       this.passwordControl.setValue(this.data.password);
       this.emailControl.setValue(this.data.email);
+      this.roleControl.setValue(this.data.role)
     }
   }
 
@@ -51,7 +51,15 @@ export class UserFormDialogComponent {
     if (this.userForm.invalid) {
       this.userForm.markAllAsTouched();
     } else {
-      this.dialogRef.close(this.userForm.value);
+      const payload: any = {
+        ...this.userForm.value
+      }
+
+      if (this.editingUser) {
+        payload['token'] = this.editingUser.token;
+      }
+
+      this.dialogRef.close(payload);
     }
   }
 }
